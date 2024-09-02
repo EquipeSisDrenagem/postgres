@@ -16,15 +16,23 @@ CREATE TABLE districts (
   municipality_id              uuid           REFERENCES municipalities (municipality_id)
 );
 
-CREATE TABLE drain_io (
-  io_id                        uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+CREATE TABLE inputs (
+  inputs_id                    uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
   inputs                       io_t[],
+);
+
+CREATE TABLE outputs (
+  outputs_id                   uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
   outputs                      io_t[]         NOT NULL
 );
 
-CREATE TABLE image_media (
-  media_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+CREATE TABLE images (
+  image_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
   images                       bytea[],
+);
+
+CREATE TABLE video (
+  video_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
   video                        bytea
 );
 
@@ -38,7 +46,7 @@ CREATE TABLE users (
   created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL
 );
 
-CREATE TABLE drains (
+CREATE TABLE standard (
   drain_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
   drain_type                   drain_type     NOT NULL,
   cover_type                   cover_type     NOT NULL,
@@ -54,11 +62,27 @@ CREATE TABLE drains (
   address                      VARCHAR (64),
   number                       VARCHAR (16),
   district_id                  uuid           REFERENCES districts (district_id),
-  io_id                        uuid           REFERENCES drain_io (io_id),
-  media_id                     uuid           REFERENCES image_media (media_id),
+  inputs_id                    uuid           REFERENCES inputs (inputs_id),
+  outputs_id                   uuid           REFERENCES outputs (outputs_id),
+  image_id                     uuid           REFERENCES images (image_id),
+  video_id                     uuid           REFERENCES video (video_id),
   created_by                   uuid           REFERENCES users (user_id),
   last_updated_by              uuid           REFERENCES users (user_id),
   created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL,
   last_updated_on              TIMESTAMP      WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
+CREATE TABLE nonstandard (
+  drain_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+  coordinates                  POINT          NOT NULL,
+  notes                        VARCHAR (512),
+  address                      VARCHAR (64),
+  number                       VARCHAR (16),
+  district_id                  uuid           REFERENCES districts (district_id),
+  image_id                     uuid           REFERENCES images (image_id),
+  video_id                     uuid           REFERENCES video (video_id),
+  created_by                   uuid           REFERENCES users (user_id),
+  last_updated_by              uuid           REFERENCES users (user_id),
+  created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL,
+  last_updated_on              TIMESTAMP      WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
