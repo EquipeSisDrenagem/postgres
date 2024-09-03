@@ -18,7 +18,7 @@ CREATE TABLE districts (
 
 CREATE TABLE inputs (
   inputs_id                    uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  inputs                       io_t[],
+  inputs                       io_t[]
 );
 
 CREATE TABLE outputs (
@@ -28,7 +28,7 @@ CREATE TABLE outputs (
 
 CREATE TABLE images (
   image_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  images                       bytea[],
+  images                       bytea[]
 );
 
 CREATE TABLE video (
