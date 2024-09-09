@@ -39,13 +39,14 @@ CREATE TYPE diameter AS ENUM (
 
 CREATE TYPE drain_status AS ENUM (
   'ok',
-  'danificado'
+  'danificado',
+  'irregular'
 );
 
 CREATE TYPE drain_fullness AS ENUM (
-  'ok',
-  'critico',
-  'cheio' 
+  'baixo',
+  'medio',
+  'critico'
 );
 
 CREATE TYPE io_t AS (
