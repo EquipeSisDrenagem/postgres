@@ -65,12 +65,13 @@ CREATE TABLE standard (
   inputs_id                    uuid           REFERENCES inputs (inputs_id),
   outputs_id                   uuid           REFERENCES outputs (outputs_id),
   image_id                     uuid           REFERENCES images (image_id),
-  video_id                     uuid           REFERENCES video (video_id),
-  created_by                   uuid           REFERENCES users (user_id),
-  last_updated_by              uuid           REFERENCES users (user_id),
-  created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL,
-  last_updated_on              TIMESTAMP      WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
+  video_id                     uuid           REFERENCES video (video_id)
 );
+
+--  created_by                   uuid           REFERENCES users (user_id),
+--  last_updated_by              uuid           REFERENCES users (user_id),
+--  created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL,
+--  last_updated_on              TIMESTAMP      WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
 
 CREATE TABLE nonstandard (
   drain_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -80,9 +81,10 @@ CREATE TABLE nonstandard (
   number                       VARCHAR (16),
   district_id                  uuid           REFERENCES districts (district_id),
   image_id                     uuid           REFERENCES images (image_id),
-  video_id                     uuid           REFERENCES video (video_id),
-  created_by                   uuid           REFERENCES users (user_id),
-  last_updated_by              uuid           REFERENCES users (user_id),
-  created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL,
-  last_updated_on              TIMESTAMP      WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
+  video_id                     uuid           REFERENCES video (video_id)
 );
+
+--  created_by                   uuid           REFERENCES users (user_id),
+--  last_updated_by              uuid           REFERENCES users (user_id),
+--  created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL,
+--  last_updated_on              TIMESTAMP      WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
