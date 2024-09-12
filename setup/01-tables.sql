@@ -16,21 +16,6 @@ CREATE TABLE districts (
   municipality_id              uuid           REFERENCES municipalities (municipality_id)
 );
 
-CREATE TABLE inputs (
-  inputs_id                    uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  inputs                       io_t[]
-);
-
-CREATE TABLE outputs (
-  outputs_id                   uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  outputs                      io_t[]         NOT NULL
-);
-
-CREATE TABLE media (
-  media_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  media                        media_t[]
-);
-
 CREATE TABLE users (
   user_id                      uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
   email                        VARCHAR        NOT NULL UNIQUE,
@@ -41,25 +26,22 @@ CREATE TABLE users (
   created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL
 );
 
-CREATE TABLE standard (
+CREATE TABLE drain (
   drain_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  drain_type                   drain_type     NOT NULL,
-  cover_type                   cover_type     NOT NULL,
-  network_type                 network_type   NOT NULL,
-  status                       drain_status   NOT NULL,
-  fullness                     drain_fullness NOT NULL,
-  length                       REAL           NOT NULL,
-  width                        REAL           NOT NULL,
-  depth                        REAL           NOT NULL,
+  drain_type                   drain_type,
+  cover_type                   cover_type,
+  network_type                 network_type,
+  status                       drain_status,
+  fullness                     drain_fullness,
+  length                       REAL,
+  width                        REAL,
+  depth                        REAL,
   volume                       REAL           GENERATED ALWAYS AS (length * width * depth) STORED,
   coordinates                  POINT          NOT NULL,
   notes                        VARCHAR (512),
   address                      VARCHAR (64),
   number                       VARCHAR (16),
-  district_id                  uuid           REFERENCES districts (district_id),
-  inputs_id                    uuid           REFERENCES inputs (inputs_id),
-  outputs_id                   uuid           REFERENCES outputs (outputs_id),
-  media_id                     uuid           REFERENCES media (media_id)
+  district_id                  uuid           REFERENCES districts (district_id)
 );
 
 --  created_by                   uuid           REFERENCES users (user_id),
@@ -67,17 +49,19 @@ CREATE TABLE standard (
 --  created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL,
 --  last_updated_on              TIMESTAMP      WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
 
-CREATE TABLE nonstandard (
-  drain_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  coordinates                  POINT          NOT NULL,
-  notes                        VARCHAR (512),
-  address                      VARCHAR (64),
-  number                       VARCHAR (16),
-  district_id                  uuid           REFERENCES districts (district_id),
-  media_id                     uuid           REFERENCES media (media_id)
+CREATE TABLE io (
+  io_id                        uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+  io_type                      io_type        NOT NULL,
+  diameter                     REAL,
+  depth                        REAL,
+  angle                        REAL,
+  drain_id                     uuid           REFERENCES drain (drain_id)
 );
 
---  created_by                   uuid           REFERENCES users (user_id),
---  last_updated_by              uuid           REFERENCES users (user_id),
---  created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL,
---  last_updated_on              TIMESTAMP      WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
+CREATE TABLE media (
+  media_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+  media_data                   BYTEA          NOT NULL,
+  media_format                 VARCHAR(32)    NOT NULL,
+  drain_id                     uuid           REFERENCES drain (drain_id)
+);
+

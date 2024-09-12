@@ -49,13 +49,7 @@ CREATE TYPE drain_fullness AS ENUM (
   'critico'
 );
 
-CREATE TYPE io_t AS (
-  diameter                     REAL,
-  depth                        REAL,
-  angle                        REAL
-);
-
-CREATE TYPE media_t AS (
-  data                         BYTEA,
-  format                       VARCHAR(32)
+CREATE TYPE io_type AS ENUM (
+  'input',
+  'output'
 );
