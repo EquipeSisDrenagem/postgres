@@ -26,14 +26,9 @@ CREATE TABLE outputs (
   outputs                      io_t[]         NOT NULL
 );
 
-CREATE TABLE images (
-  image_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  images                       bytea[]
-);
-
-CREATE TABLE video (
-  video_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  video                        bytea
+CREATE TABLE media (
+  media_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+  media                        media_t[]
 );
 
 CREATE TABLE users (
@@ -64,8 +59,7 @@ CREATE TABLE standard (
   district_id                  uuid           REFERENCES districts (district_id),
   inputs_id                    uuid           REFERENCES inputs (inputs_id),
   outputs_id                   uuid           REFERENCES outputs (outputs_id),
-  image_id                     uuid           REFERENCES images (image_id),
-  video_id                     uuid           REFERENCES video (video_id)
+  media_id                     uuid           REFERENCES media (media_id)
 );
 
 --  created_by                   uuid           REFERENCES users (user_id),
@@ -80,8 +74,7 @@ CREATE TABLE nonstandard (
   address                      VARCHAR (64),
   number                       VARCHAR (16),
   district_id                  uuid           REFERENCES districts (district_id),
-  image_id                     uuid           REFERENCES images (image_id),
-  video_id                     uuid           REFERENCES video (video_id)
+  media_id                     uuid           REFERENCES media (media_id)
 );
 
 --  created_by                   uuid           REFERENCES users (user_id),

@@ -55,3 +55,7 @@ CREATE TYPE io_t AS (
   angle                        REAL
 );
 
+CREATE TYPE media_t AS (
+  data                         BYTEA,
+  format                       VARCHAR(32)
+);
