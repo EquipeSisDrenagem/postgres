@@ -52,10 +52,11 @@ CREATE TABLE drain (
 CREATE TABLE io (
   io_id                        uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
   io_type                      io_type        NOT NULL,
+  primary_drain_id             uuid           REFERENCES drain (drain_id),
+  secondary_drain_id           uuid           REFERENCES drain (drain_id),
   diameter                     REAL,
   depth                        REAL,
-  angle                        REAL,
-  drain_id                     uuid           REFERENCES drain (drain_id)
+  angle                        REAL
 );
 
 CREATE TABLE media (

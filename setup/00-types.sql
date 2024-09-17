@@ -2,7 +2,8 @@ CREATE TYPE drain_type AS ENUM (
   'caixa_ralo',
   'pv',
   'pv_boca_ralo',
-  'mata_burro'
+  'mata_burro',
+  'outros'
 );
 
 CREATE TYPE cover_type AS ENUM (
