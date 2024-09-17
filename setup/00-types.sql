@@ -39,7 +39,7 @@ CREATE TYPE diameter AS ENUM (
 );
 
 CREATE TYPE drain_status AS ENUM (
-  'ok',
+  'bom',
   'danificado',
   'irregular'
 );
