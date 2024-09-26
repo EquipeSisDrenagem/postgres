@@ -7,7 +7,7 @@ VALUES ('Niterói', (SELECT id FROM states WHERE name = 'Rio de Janeiro'));
 WITH city AS (
   SELECT id
   FROM municipalities
-  WHERE name = 'Niteroi'
+  WHERE name = 'Niterói'
 )
 INSERT INTO districts (name, municipality_id)
 SELECT name, city.id
