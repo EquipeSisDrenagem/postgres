@@ -1,33 +1,33 @@
 CREATE TABLE states (
-  state_id                    uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  state_name                  VARCHAR (128)  NOT NULL,
-  state_abbreviation          VARCHAR (2)    NOT NULL
+  id                           uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+  name                         VARCHAR (128)  NOT NULL,
+  abbreviation                 VARCHAR (2)    NOT NULL
 );
 
-CREATE TABLE municipalities (
-  municipality_id             uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  municipality_name           VARCHAR (128)  NOT NULL,
-  state_id                    uuid           REFERENCES states (state_id)
+CREATE TABLE municipalities ( 
+  id                           uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+  name                         VARCHAR (128)  NOT NULL,
+  state_id                     uuid           REFERENCES states (id)
 );
 
 CREATE TABLE districts (
-  district_id                  uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  district_name                VARCHAR (128)  NOT NULL,
-  municipality_id              uuid           REFERENCES municipalities (municipality_id)
+  id                           uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+  name                         VARCHAR (128)  NOT NULL,
+  municipality_id              uuid           REFERENCES municipalities (id)
 );
 
 CREATE TABLE users (
-  user_id                      uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+  id                           uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
   email                        VARCHAR        NOT NULL UNIQUE,
   cpf                          VARCHAR (11)   NOT NULL UNIQUE,
-  full_name                    VARCHAR        NOT NULL,
+  name                         VARCHAR        NOT NULL,
   phone                        VARCHAR        NOT NULL,
   password                     VARCHAR        NOT NULL,
   created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL
 );
 
-CREATE TABLE drain (
-  drain_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+CREATE TABLE drains (
+  id                           uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
   drain_type                   drain_type,
   cover_type                   cover_type,
   network_type                 network_type,
@@ -41,7 +41,7 @@ CREATE TABLE drain (
   notes                        VARCHAR (512),
   address                      VARCHAR (64),
   number                       VARCHAR (16),
-  district_id                  uuid           REFERENCES districts (district_id)
+  district_id                  uuid           REFERENCES districts (id)
 );
 
 --  created_by                   uuid           REFERENCES users (user_id),
@@ -50,19 +50,19 @@ CREATE TABLE drain (
 --  last_updated_on              TIMESTAMP      WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
 
 CREATE TABLE io (
-  io_id                        uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  io_type                      io_type        NOT NULL,
-  primary_drain_id             uuid           REFERENCES drain (drain_id),
-  secondary_drain_id           uuid           REFERENCES drain (drain_id),
+  id                           uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+  type                         io_type        NOT NULL,
+  primary_drain_id             uuid           REFERENCES drains (id),
+  secondary_drain_id           uuid           REFERENCES drains (id),
   diameter                     REAL,
   depth                        REAL,
   angle                        REAL
 );
 
 CREATE TABLE media (
-  media_id                     uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  media_data                   BYTEA          NOT NULL,
-  media_format                 VARCHAR(32)    NOT NULL,
-  drain_id                     uuid           REFERENCES drain (drain_id)
+  id                           uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
+  data                         BYTEA          NOT NULL,
+  format                       VARCHAR(32)    NOT NULL,
+  drain_id                     uuid           REFERENCES drains (id)
 );
 

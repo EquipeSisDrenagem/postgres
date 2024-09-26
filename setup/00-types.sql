@@ -1,26 +1,26 @@
 CREATE TYPE drain_type AS ENUM (
-  'caixa_ralo',
-  'pv',
-  'pv_boca_ralo',
-  'mata_burro',
-  'outros'
+  'Caixa Ralo',
+  'PV',
+  'PV Boca Ralo',
+  'Mata Burro',
+  'Outros'
 );
 
 CREATE TYPE cover_type AS ENUM (
-  'grelha_concreto',
-  'grelha_ferro',
-  'grelha_plastico',
-  'tampao_concreto_cego',
-  'tampao_concreto_furado',
-  'tampao_concreto_duplo',
-  'tampao_redondo'
+  'Grelha Concreto',
+  'Grelha Ferro',
+  'Grelha Plastico',
+  'Tampao Concreto Cego',
+  'Tampao Concreto Furado',
+  'Tampao Concreto Duplo',
+  'Tampao Redondo'
 );
 
 CREATE TYPE network_type as ENUM (
-  'concreto',
-  'pead',
-  'pvc',
-  'aco'
+  'Concreto',
+  'PEAD',
+  'PVC',
+  'Aço'
 );
 
 CREATE TYPE diameter AS ENUM (
@@ -39,18 +39,18 @@ CREATE TYPE diameter AS ENUM (
 );
 
 CREATE TYPE drain_status AS ENUM (
-  'bom',
-  'danificado',
-  'irregular'
+  'Bom',
+  'Danificado',
+  'Irregular'
 );
 
 CREATE TYPE drain_fullness AS ENUM (
-  'baixo',
-  'medio',
-  'critico'
+  'Baixo',
+  'Médio',
+  'Crítico'
 );
 
 CREATE TYPE io_type AS ENUM (
-  'input',
+  'entrada',
   'output'
 );

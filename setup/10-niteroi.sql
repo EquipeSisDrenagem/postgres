@@ -1,16 +1,16 @@
-INSERT INTO states (state_name, state_abbreviation)
+INSERT INTO states (name, abbreviation)
 VALUES ('Rio de Janeiro', 'RJ');
 
-INSERT INTO municipalities (municipality_name, state_id)
-VALUES ('Niteroi', (SELECT state_id FROM states WHERE state_name = 'Rio de Janeiro'));
+INSERT INTO municipalities (name, state_id)
+VALUES ('Niterói', (SELECT id FROM states WHERE name = 'Rio de Janeiro'));
 
 WITH city AS (
-  SELECT municipality_id
+  SELECT id
   FROM municipalities
-  WHERE municipality_name = 'Niteroi'
+  WHERE name = 'Niteroi'
 )
-INSERT INTO districts (district_name, municipality_id)
-SELECT district_name, city.municipality_id
+INSERT INTO districts (name, municipality_id)
+SELECT name, city.id
 FROM (
   VALUES
     ('Badu'),
@@ -65,5 +65,5 @@ FROM (
     ('Vital Brazil'),
     ('Viçoso Jardim'),
     ('Várzea das Moças')
-  ) AS districts (district_name)
+  ) AS districts (name)
 CROSS JOIN city;
