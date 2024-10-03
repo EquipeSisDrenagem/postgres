@@ -9,11 +9,11 @@ CREATE TYPE drain_type AS ENUM (
 CREATE TYPE cover_type AS ENUM (
   'Grelha Concreto',
   'Grelha Ferro',
-  'Grelha Plastico',
-  'Tampao Concreto Cego',
-  'Tampao Concreto Furado',
-  'Tampao Concreto Duplo',
-  'Tampao Redondo'
+  'Grelha Plástico',
+  'Tampão Concreto Cego',
+  'Tampão Concreto Furado',
+  'Tampão Concreto Duplo',
+  'Tampão Redondo'
 );
 
 CREATE TYPE network_type as ENUM (
@@ -51,6 +51,6 @@ CREATE TYPE drain_fullness AS ENUM (
 );
 
 CREATE TYPE io_type AS ENUM (
-  'entrada',
+  'input',
   'output'
 );
