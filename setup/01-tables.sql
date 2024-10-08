@@ -18,13 +18,15 @@ CREATE TABLE districts (
 
 CREATE TABLE users (
   id                           uuid           DEFAULT gen_random_uuid() PRIMARY KEY,
-  email                        VARCHAR        NOT NULL UNIQUE,
   cpf                          VARCHAR (11)   NOT NULL UNIQUE,
+  email                        VARCHAR        NOT NULL UNIQUE,
   name                         VARCHAR        NOT NULL,
   phone                        VARCHAR        NOT NULL,
   password                     VARCHAR        NOT NULL,
-  created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL
+  role                         user_role      NOT NULL
 );
+
+-- created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL
 
 CREATE TABLE drains (
   id                           uuid           DEFAULT gen_random_uuid() PRIMARY KEY,

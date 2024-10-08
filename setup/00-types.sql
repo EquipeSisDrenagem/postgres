@@ -54,3 +54,11 @@ CREATE TYPE io_type AS ENUM (
   'input',
   'output'
 );
+
+CREATE TYPE user_role AS ENUM (
+  'developer',
+  'admin',
+  'field_staff',
+  'office_staff',
+  'observer'
+);
