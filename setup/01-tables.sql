@@ -23,7 +23,8 @@ CREATE TABLE users (
   name                         VARCHAR        NOT NULL,
   phone                        VARCHAR        NOT NULL,
   password                     VARCHAR        NOT NULL,
-  role                         user_role      NOT NULL
+  role                         user_role      NOT NULL,
+  active                       boolean        DEFAULT TRUE
 );
 
 -- created_on                   TIMESTAMP      WITH TIME ZONE NOT NULL
